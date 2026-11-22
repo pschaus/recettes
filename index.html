@@ -1,616 +1,1072 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-	<meta http-equiv= "content-type" content= "text/html; charset=UTF-8" >
-	<title>La page de lucie</title>
-
-	<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"-->
-</head>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="apple-mobile-web-app-title" content="Recettes Lucie">
+	<title>Mon carnet de recettes — La page de Lucie</title>
 	<link rel="stylesheet" href="bootstrap.css">
 	<link rel="stylesheet" href="style.css">
 </head>
+<body id="top">
 
-<body>
+	<!-- Barre de navigation fixe pour iPhone -->
+	<header class="app-header">
+		<div class="header-inner">
+			<div class="header-top">
+				<a href="#top" class="brand-title">
+					<span>📖</span>
+					<span>Mon carnet de recettes</span>
+				</a>
+				<div class="header-actions">
+					<button type="button" id="wakeLockBtn" class="wake-btn" title="Empêcher l'écran de l'iPhone de s'éteindre pendant la cuisine">
+						<span id="wakeIcon">☀️</span>
+						<span id="wakeText">Écran actif</span>
+					</button>
+				</div>
+			</div>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<div class="nav-controls">
+				<div class="search-wrapper">
+					<span class="search-icon">🔍</span>
+					<input type="search" id="searchInput" class="search-input" placeholder="Rechercher une recette ou un ingrédient…" autocomplete="off">
+					<button type="button" id="clearSearchBtn" class="search-clear" aria-label="Effacer la recherche">✕</button>
+				</div>
 
-	<div class="container">
-   		<div class="row clearfix">
+				<select id="quickJumpSelect" class="quick-select" aria-label="Aller directement à une recette">
+					<option value="">Aller à…</option>
+					<option value="#speculoos">Spéculoos</option>
+					<option value="#patissiere">Crème pâtissière</option>
+					<option value="#choux">Petits choux</option>
+					<option value="#crepe">Pâte à crêpes</option>
+					<option value="#cookies">Cookies au chocolat</option>
+					<option value="#tiramissu">Tiramisu</option>
+					<option value="#pancakes">Pancakes</option>
+					<option value="#pizza">Pâte à pizza</option>
+					<option value="#mousse">Mousse au chocolat</option>
+					<option value="#cake">Cake marbré</option>
+					<option value="#glace">Glace vanille</option>
+					<option value="#gaufres">Gaufres de Liège</option>
+					<option value="#micuit">Mi-cuit au chocolat</option>
+					<option value="#bearnaise">Sauce béarnaise</option>
+					<option value="#boulettes">Boulettes liégeoises</option>
+					<option value="#grany">Biscuits type Grany</option>
+				</select>
+			</div>
 
-   			<div class="col-md-12 column">
-   				<h1>Mon carnet de recettes</h1>
-   					<ul>
-						<li><a href="#speculoos">Spéculoos</a></li>
-						<li><a href="#patissiere">Crème Patissière</a></li>
-						<li><a href="#choux">Petis choux</a></li>
-						<li><a href="#crepe">Pâte à crêpes</a></li>
-						<li><a href="#cookies">Cookies</a></li>
-						<li><a href="#tiramissu">Tiramissu</a></li>
-						<li><a href="#pancakes">Pancakes</a></li>
-						<li><a href="#pizza">Pâte à pizza</a></li>
-						<li><a href="#mousse">Mousse au chocolat</a></li>
-						<li><a href="#cake">Cake Marbré au chocolat</a></li>
-						<li><a href="#glace">Glace vanille</a></li>
-						<li><a href="#gaufres">Gaufres de Liège</a></li>
-						<li><a href="#micuit">Mi-Cuit au chocolat</a></li>
-						<li><a href="#bearnaise">Sauce béarnaise</a></li>
-						<li><a href="#boulettes">Boulettes Liégoises</a></li>
-						<li><a href="#grany">Biscuits aux flocons d'avoines type grany</a></li>
-					</ul>
+			<nav class="category-bar" aria-label="Filtrer par catégorie">
+				<button type="button" class="cat-pill active" data-cat="all">Toutes (16)</button>
+				<button type="button" class="cat-pill" data-cat="biscuits">🍪 Biscuits & Gâteaux</button>
+				<button type="button" class="cat-pill" data-cat="crepes">🥞 Crêpes & Gaufres</button>
+				<button type="button" class="cat-pill" data-cat="desserts">🍫 Desserts & Glaces</button>
+				<button type="button" class="cat-pill" data-cat="bases">🥣 Pâtes & Crèmes</button>
+				<button type="button" class="cat-pill" data-cat="sale">🍲 Salé & Sauces</button>
+			</nav>
+		</div>
+	</header>
 
+	<main class="main-container">
 
-					<!----------------------------------------------------------------------------->
-				
-					<h2 id="speculoos">Spéculoos</h2>
-
-					<div class="row" class="recette">
-  						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>1 kg farine</li>
-								<li>600 g cassonade brune</li>
-								<li>400 g de margarine molles</li>
-								<li>2 cuillères à café de "4 épices"</li>
-								<li>1 cuilèrre à café de canelle</li>
-								<li>1 cuirère à café de bicarbonate de soude</li>
-								<li>1 pincée de sel</li>
-							</ul>
-  						</div>
-  						<div class="col-lg-4">
-  							<h3>Préparation:</h3>
-							<ol>
-								<li>Bien mélanger le tout</li>
-								<li>Faire un boudin et l'emballer dans du film alimentaire et mettre au frigo pendant une nuit</li>
-								<li>Préchauffer le four à 220°C</li>
-								<li>Couper le boudin en tranches de +- 1.5 cm d'épaisseur</li>
-								<li>Mettre éventuellement une amande effilée au centre</li>
-								<li>Cuire 12 minutes à 180° C</li>
-								<li>Sortir du four,</li>
-								<li>Bon appétit!</li>
-							</ol>
-  						</div>
-  						<div class="col-lg-4">
-  							<img src="images/speculoos.jpg" width="300px" />
-  						</div>
+		<!-- Sommaire visuel accès rapide -->
+		<section class="sommaire-section" id="sommaireSection">
+			<div class="sommaire-header">
+				<h2 class="sommaire-title">Accès rapide aux recettes</h2>
+				<button type="button" id="toggleSommaireBtn" class="toggle-sommaire-btn">Masquer</button>
+			</div>
+			<div class="recipe-grid" id="recipeGrid">
+				<a href="#speculoos" class="index-card" data-cat="biscuits" data-target="speculoos">
+					<img src="images/speculoos.jpg" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Spéculoos</div>
+						<span class="index-card-meta">12 min • 180°C</span>
 					</div>
-
-
-				    
-
-					<!----------------------------------------------------------------------------->
-				    
-					<h2 id="patissere"> La crème patissière</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>1 litre de lait demi écrémé</li>
-								<li>90 g pudding</li>
-								<li>3 oeufs entiers</li>
-								<li>200 g sucre</li>
-								<li>1 pincée de sel</li>
-
-							</ul>
-						</div>
-
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Delayer le pudding, les oeufs, le sucre dans 1/3 du lait froid dans un grand bol jusqu'à ce qu'il n'y ait plus de grumeaux</li>
-								<li>Ajouter le mélange délayé dans une casserole avec le reste du lait et porter à ébullition</li>
-								<li>Retirer la casserole du feu lorsque le pudding est bien épais tout en continuant à mélanger</li>
-								<li>Laisser refroidir et reposer une nuit au frigo</li>
-								<li>Sortir du frigo et battre doucement la crème pour la rendre onctueuse et homogène</li>
-								<li>La crème patissière est maintenant prète à remplir vos patisseries avec une poche à douille</li>
-							</ol> 
-						</div>
-
-						<div class="col-lg-4">
-  							<img src="images/ingredients.jpg" width="300px">
-  						</div>
+				</a>
+				<a href="#patissiere" class="index-card" data-cat="bases" data-target="patissiere">
+					<img src="images/ingredients.jpg" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Crème pâtissière</div>
+						<span class="index-card-meta">1 L de lait</span>
 					</div>
-
-					
-					<br>
-
-					<!----------------------------------------------------------------------------->
-
-
-					<h2 id="choux"> Les petits choux </h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>125 g de lait demi écrémé</li>
-								<li>125 g d'eau</li>
-								<li>200 g de farine</li>
-								<li>100 g de margarine</li>
-								<li>5 oeufs entiers</li>
-								<li>3 pincées de sel</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Mettre dans une casserole l'eau, le lait, la margarine et le sel</li>
-								<li>Au premier bouillon, jeter la farine et tourner vivement avec la cuillère en bois jusqu'à ce que la pâte forme une boule et se détache de la casserole</li>
-								<li>Hors du feu, incorporer les oeufs, un à un</li>
-								<li>Cuire à 200°C charleur tournante</li>
-							</ol>
-						</div>
-
-						<div class="col-lg-4">
-  							<img src="images/choux.jpg" width="300px">
-  						</div>
+				</a>
+				<a href="#choux" class="index-card" data-cat="biscuits" data-target="choux">
+					<img src="images/choux.jpg" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Petits choux</div>
+						<span class="index-card-meta">Four 200°C</span>
 					</div>
+				</a>
+				<a href="#crepe" class="index-card" data-cat="crepes" data-target="crepe">
+					<div class="index-thumb">🥞</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Pâte à crêpes</div>
+						<span class="index-card-meta">4 personnes</span>
+					</div>
+				</a>
+				<a href="#cookies" class="index-card" data-cat="biscuits" data-target="cookies">
+					<img src="images/cookies.jpg" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Cookies chocolat</div>
+						<span class="index-card-meta">10-12 min • 180°C</span>
+					</div>
+				</a>
+				<a href="#tiramissu" class="index-card" data-cat="desserts" data-target="tiramissu">
+					<div class="index-thumb">🍰</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Tiramisu</div>
+						<span class="index-card-meta">8 personnes</span>
+					</div>
+				</a>
+				<a href="#pancakes" class="index-card" data-cat="crepes" data-target="pancakes">
+					<div class="index-thumb">🥞</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Pancakes</div>
+						<span class="index-card-meta">5 personnes</span>
+					</div>
+				</a>
+				<a href="#pizza" class="index-card" data-cat="bases" data-target="pizza">
+					<div class="index-thumb">🍕</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Pâte à pizza</div>
+						<span class="index-card-meta">6 personnes</span>
+					</div>
+				</a>
+				<a href="#mousse" class="index-card" data-cat="desserts" data-target="mousse">
+					<div class="index-thumb">🍫</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Mousse chocolat</div>
+						<span class="index-card-meta">8 personnes</span>
+					</div>
+				</a>
+				<a href="#cake" class="index-card" data-cat="biscuits" data-target="cake">
+					<img src="images/cake.png" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Cake marbré</div>
+						<span class="index-card-meta">8 pers • 170°C</span>
+					</div>
+				</a>
+				<a href="#glace" class="index-card" data-cat="desserts" data-target="glace">
+					<img src="images/glace.png" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Glace vanille</div>
+						<span class="index-card-meta">2 litres</span>
+					</div>
+				</a>
+				<a href="#gaufres" class="index-card" data-cat="crepes" data-target="gaufres">
+					<img src="images/gaufres.png" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Gaufres de Liège</div>
+						<span class="index-card-meta">Repos 15 min</span>
+					</div>
+				</a>
+				<a href="#micuit" class="index-card" data-cat="desserts" data-target="micuit">
+					<img src="images/micuit.png" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Mi-cuit chocolat</div>
+						<span class="index-card-meta">4 pers • 15 min</span>
+					</div>
+				</a>
+				<a href="#bearnaise" class="index-card" data-cat="sale" data-target="bearnaise">
+					<div class="index-thumb">🥣</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Sauce béarnaise</div>
+						<span class="index-card-meta">1 personne</span>
+					</div>
+				</a>
+				<a href="#boulettes" class="index-card" data-cat="sale" data-target="boulettes">
+					<div class="index-thumb">🍲</div>
+					<div class="index-card-info">
+						<div class="index-card-title">Boulettes liégeoises</div>
+						<span class="index-card-meta">6 personnes</span>
+					</div>
+				</a>
+				<a href="#grany" class="index-card" data-cat="biscuits" data-target="grany">
+					<img src="images/grany.png" alt="" class="index-thumb" loading="lazy">
+					<div class="index-card-info">
+						<div class="index-card-title">Biscuits Grany</div>
+						<span class="index-card-meta">15 min • 180°C</span>
+					</div>
+				</a>
+			</div>
+		</section>
 
-					
+		<div id="emptyState" class="empty-state">
+			<p>Aucune recette ne correspond à votre recherche.</p>
+			<button type="button" id="resetFilterBtn" class="cat-pill active">Afficher toutes les recettes</button>
+		</div>
 
-					<!----------------------------------------------------------------------------->
+		<!-- Liste des recettes -->
+		<div class="recipes-list" id="recipesList">
 
-
-					<h2 id="crepe"> Pâte à crêpes non sucrée (4 personnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>150 g de farine fermentante</li>
-								<li>4 oeufs</li>
-								<li>4 dl de lait</li>
-								<li>4 cuillères à soupe de beurre</li>
-								<li>1 pincées de sel</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Tiédir le lait et le beurre</li>
-								<li>Battre les oeufs entiers en omelette, ajouter la farine et la pincée de sel</li<>
-								<li>Verser le liquide sur ce mélange et fouetter vivement pour obtenir une pâte bien lisse</li>
-								<li>Laisser reposer de préférence 30 minutes avant l'emploi</li>
-							</ol>
+			<!-- Spéculoos -->
+			<article id="speculoos" class="recette-card" data-cat="biscuits">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Spéculoos</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🍪 Biscuits</span>
+							<span class="badge-pill">🔥 Cuisson 12 min à 180°C</span>
+							<span class="badge-pill">❄️ Repos 1 nuit</span>
 						</div>
 					</div>
-
-					<!----------------------------------------------------------------------------->
-
-					<h2 id="cookies"> Cookies au Chocolat</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>150 g de sucre</li>
-								<li>150 g de sucre brun</li>
-								<li>200 g de beurre fondu</li>
-								<li>2 oeufs</li>
-								<li>300 g de farine</li>
-								<li>1 cuillère à café de levure sèche</li>
-								<li>1 paquet de sucre vanilliné</li>
-								<li>300 g de pépites de chocolat</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Préchauffer le four le four à 180°</li>
-								<li>Dans un plat mélanger les sucres et le beurre fondu</li>
-								<li>Ajouter les oeufs et battre le mélange</li>
-								<li>Incorporer la farine et la levure</li>
-								<li>Mélanger bien la préparation en ajoutant le chocolat</li>
-								<li>Former des petites boules sur la plaque du four couverte d'un papier de cuisson</li>
-								<li>Cuire pendant 10-12 minutes (ne pas cuire de trop, ils vont durcir en refroidissant)</li>
-								<li>Laisser refroidir avant la dégustation</li>
-							</ol>
-						</div>
-						<div class="col-lg-4">
-  							<img src="images/cookies.jpg" width="300px">
-  						</div>						
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
 					</div>
-
-					<!----------------------------------------------------------------------------->
-
-
-					<h2 id="tiramissu"> Tiramissu (8 personnes) </h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>500 g de mascarpone</li>
-								<li>100 g de sucre</li>
-								<li>4 oeufs</li>
-								<li>(fruits rouges ou spéculoos)</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Battre au fouet électrique les jaunes d'oeufs avec le sucre jusqu'à ce qu'ils blanchissent</li>
-								<li>Ajouter le Mascarpone et bien mélanger</li>
-								<li>Battre les blancs d'oeufs en neige ferme et les ajouter délicatement à la préparation</li>
-								<li>Présenter dans un plat en pirex avec des couches de spéculoos ou des fruits rouges)</li>
-								<li>Mettre au moins 3h au réfrigérateur et 30 minutes au surgélateur avant de servir.</li>
-							</ol>
-						</div>
-						<!--div class="col-lg-4">
-  							<img src="images/cookies.jpg" width="300px">
-  						</div-->						
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>1 kg farine</li>
+							<li>600 g cassonade brune</li>
+							<li>400 g de margarine molle</li>
+							<li>2 cuillères à café de "4 épices"</li>
+							<li>1 cuillère à café de cannelle</li>
+							<li>1 cuillère à café de bicarbonate de soude</li>
+							<li>1 pincée de sel</li>
+						</ul>
 					</div>
-
-					<!----------------------------------------------------------------------------->
-
-					<h2 id="pancakes"> Pancakes (5 personnes) </h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>3 oeufs</li>
-								<li>3 cuillères à soupe de sucre</li>
-								<li>3 cuillères à soupe d'huile ou de beurre fondu</li>
-								<li>3 cuillères à café de levure</li>
-								<li>375 g de farine</li>
-								<li>500 ml de lait</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Battre l'oeuf et le sucre dans un saladier</li>
-								<li>Ajouter le beurre fondu ou l'huile</li>
-								<li>Mélanger la farine et la levure et mélanger la moitié avec la préparation</li>
-								<li>Délayer progressivement avec le lait tout en rajoutant l'autre moitié de farine petit à petit pour éviter les grumeaux</li>
-								<li>Aucun temps de repos n'est nécessaire</li>
-								<li>Cuire dans une poêle à feu moyen</li>
-								<li>A l'aide d'une petit e louche déposer des ronds dans la poêle</li>
-								<li>Lorsque les bulles apparaissent et éclatent, retourner les pancakes (attention, une fois retourné cela va encore plus vite)</li>
-							</ol>
-						</div>
-						<!--div class="col-lg-4">
-  							<img src="images/cookies.jpg" width="300px">
-  						</div-->						
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Bien mélanger le tout.</li>
+							<li>Faire un boudin, l'emballer dans du film alimentaire et mettre au frigo pendant une nuit.</li>
+							<li>Préchauffer le four à 220°C.</li>
+							<li>Couper le boudin en tranches de ± 1,5 cm d'épaisseur.</li>
+							<li>Mettre éventuellement une amande effilée au centre.</li>
+							<li>Cuire 12 minutes à 180°C.</li>
+							<li>Sortir du four. Bon appétit !</li>
+						</ol>
 					</div>
-
-					<!----------------------------------------------------------------------------->
-
-					<h2 id="pizza"> Pate à Pizza (6 personnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>525 gr de farine</li>
-								<li>3 cuillères à café de sel</li>
-								<li>1.5 sachet de levure</li>
-								<li>5 cuillères à soupes d'huile d'olive</li>
-								<li>40 cl d'eau tiède</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Mettre la farine dans un grand saladier puis ajouter sel, levure et huile</li>
-								<li>Verser petit à petit l'eau tiède tout en mélangeant avec une cuillière en bois</li>
-								<li>Remuer longuement jusuq'à l'obtention d'une pâte qui se détache</li>
-								<li>Laisser reposer 1h avec un torchon dans un endroit chaud</li>
-								<li>Travailler la pâte comme une pâte à pain en faisant ressortir l'air</li>
-								<li>Façonner votre pâte aux dimensions de la plaque du four</li>
-								<li>Agrémenter de vos envies ou de vos restes dans le frigo</li>
-							</ol>
-						</div>
-						<!--div class="col-lg-4">
-  							<img src="images/cookies.jpg" width="300px">
-  						</div-->						
+					<div class="recette-photo-wrap">
+						<img src="images/speculoos.jpg" alt="Spéculoos" class="recette-photo" loading="lazy">
 					</div>
+				</div>
+			</article>
 
-					<!----------------------------------------------------------------------------->
-
-					<h2 id="mousse"> Mousse au chocolat (8 personnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>200 g de cholocal noir</li>
-								<li>4 oeufs</li>
-								<li>2 dl de crème fraîche</li>
-							</ul>
+			<!-- Crème pâtissière -->
+			<span id="patissere"></span>
+			<article id="patissiere" class="recette-card" data-cat="bases">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">La crème pâtissière</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🥣 Crèmes & Bases</span>
+							<span class="badge-pill">🥛 1 L de lait</span>
+							<span class="badge-pill">❄️ Repos 1 nuit</span>
 						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Séparer les blancs et les jaunes</li>
-								<li>Fondre le chocolat au bain marie avec très peu de lait</li>
-								<li>Hors du feu, ajouter un à un les jaunes d'oeufs</li>
-								<li>Battre les blancs en neige ferme</li>
-								<li>Battre la crème fraîche en Chantilly</li>
-								<li>Mélanger légèrement la crème fraîche et les blancs battus</li>
-								<li>Les incorporer à la préparation au chocolat tiédie</li>
-								<li>Laisser prendre au moins 6 heures au réfrigérateur</li>
-							</ol>
-						</div>
-						<!--div class="col-lg-4">
-  							<img src="images/cookies.jpg" width="300px">
-  						</div-->						
 					</div>
-
-					<!----------------------------------------------------------------------------->		
-
-					<h2 id="cake"> Cake marbré au chocolat (8 personnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>200 g beurre</li>
-								<li>200 g de sucre</li>
-								<li>1 paquet de sucre vanillé</li>
-								<li>300 g de farine</li>
-								<li>4 oeufs</li>
-								<li>1 sachet de levure chimique (10 gr)</li>
-								<li>1 pincée de sel</li>
-								<li>25 g de cacao</li>
-								<li>3 cuillères à soupe de crème fraîche</li>
-								<li>3 cuillères à soupe de lait</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Séparer les jaunes et les blancs</li>
-								<li>Battre les jaunes, le sucre et le sucre vanillé avec un batteur électrique jusqu'à ce qu'ils blanchissent et forment ruban</li>
-								<li>Faire fondre le beurre et l'ajouter au mélange oeufs-sucre</li>
-								<li>Ajouter la crème et le lait pour alleger la pâte</li>
-								<li>Battre la crème fraîche en Chantilly</li>
-								<li>Battre les blancs en neige ferme avec une pincée de sel à la fin</li>
-								<li>Ajouter alternativement la farine et les blancs en eige au mélange en travaillant souplement</li>
-								<li>Mettre 1/3 de la pâte dans un autre récipient et la mélanger avec le cacao</li>
-								<li>Dans moule, étaler des couches de la pâte blanche et brune successivement en commencant et terminant par une couche blanche</li>
-								<li> Remplir maximum aux 2/3 le moule</li>
-								<li>Préchauffer le four à 170 degrés</li>
-								<li>Faire cuire pendant 55 à 60 minutes en contrôlant la cuisson avec une aiguille à tricoter piquée au milieu du gâteau</li>
-							</ol>
-						</div>
-						<div class="col-lg-4">
-  							<img src="images/cake.png" width="300px">
-  						</div>						
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
 					</div>
-
-					<!----------------------------------------------------------------------------->				
-
-
-					<h2 id="glace"> Glace vanille de Bonne Maman (pour deux litres de glaces)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>1 litre de lait demi écrémé</li>
-								<li>300 g de sucre</li>
-								<li>2 sachets de sucre vanillé</li>
-								<li>10 jaunes oeufs</li>
-								<li>40 cl de crème fraiche</li>
-								<li>1 pincée de sel</li>
-								<li>5 batons de chocolat pour la stracciatella.</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Faire un ruban avec les jaunes et les sucres (battre au fouet électrique jusqu’à ce que ça blanchisse) </li>
-								<li>Faire bouillir le lait avec une pincée de sel </li>
-								<li>Verser le lait bouillant sur le ruban tout en mélangeant pour éviter que les jaunes de cuisent.
-</li>
-								<li>Reverser le mélange dans la casserole.</li>
-								<li>Chauffer en battant jusqu’au premier bouillon et que le mélange épaississe (le mélange devient mousseux). C’est ce qui donnera l’onctuosité à votre glace.</li>
-								<li>Stopper la cuisson en plongeant votre casserole dans un évier d’eau froide.</li>
-								<li>Laisser refroidir la glace et puis la mettre au frigo jusqu’au refroidissement complet.
-</li>
-								<li>Mettre aussi la crème fraîche au frigo.</li>
-								<li>Lorsque le mélange et la crème sont bien froids, ajouter les deux berlingots de crème fraîche avant du turbiner.</li>
-								<li>Turbiner la glace pendnat environ 30 minutes</li>
-								<li>Pour la stracciatella, faire fondre son chocolat tout doucement pour qu’il soit fondu, mais à température minimum et l’ajouter à la fin quand la glace est prise.</li>
-							</ol>
-						</div>
-						<div class="col-lg-4">
-  							<img src="images/glace.png" width="300px">
-  						</div>						
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>1 litre de lait demi-écrémé</li>
+							<li>90 g de pudding</li>
+							<li>3 œufs entiers</li>
+							<li>200 g de sucre</li>
+							<li>1 pincée de sel</li>
+						</ul>
 					</div>
-
-					<!----------------------------------------------------------------------------->	
-
-
-
-					<h2 id="gaufres"> Gaufres de Liège</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>50 g de leveure fraiche</li>
-								<li>2 dl d'eau froide</li>
-								<li>300 g de beurre</li>
-								<li>400 g de farine</li>
-								<li>25 g de sucre impalpable</li>
-								<li>250 g de sucre perlé</li>
-								<li>2 oeufs entiers</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Délayer les 50 gr de levure fraiche dans 2 dl d'eau froide</li>
-								<li>Ramolir le beurre en crème</li>
-								<li>Mélanger tous les ingrédients et laisser reposer 15 minutes</li>
-								<li>Cuire dans un gaufrier</li>
-							</ol>
-						</div>
-						<div class="col-lg-4">
-  							<img src="images/gaufres.png" width="300px">
-  						</div>						
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Délayer le pudding, les œufs et le sucre dans 1/3 du lait froid dans un grand bol jusqu'à ce qu'il n'y ait plus de grumeaux.</li>
+							<li>Ajouter le mélange délayé dans une casserole avec le reste du lait et porter à ébullition.</li>
+							<li>Retirer la casserole du feu lorsque le pudding est bien épais tout en continuant à mélanger.</li>
+							<li>Laisser refroidir et reposer une nuit au frigo.</li>
+							<li>Sortir du frigo et battre doucement la crème pour la rendre onctueuse et homogène.</li>
+							<li>La crème pâtissière est maintenant prête à remplir vos pâtisseries avec une poche à douille.</li>
+						</ol>
 					</div>
-
-					<!----------------------------------------------------------------------------->	
-
-
-
-					<h2 id="micuit"> Mi-Cuit au chocolat (4 personnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>40 g de farine</li>
-								<li>3 oeufs entiers</li>
-								<li>100 g de chocolat noir</li>
-								<li>90 g de beurre</li>
-								<li>120 g de sucre</li>
-							</ul>
-						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Préchauffer le four à 200°C</li>
-								<li>Fondre le chocolat et le beurre</li>
-								<li>Blanchir les oeufs entiers et le sucre au batteur</li>
-								<li>Mélanger le chocolat, le beurre et les oeufs</li>
-								<li>Incorporer la farine</li>
-								<li>Beurrer des ramequins ou des moules en aluminium jetables</li>
-								<li>Verser la préparation dans les moules</li>
-								<li>Enfourner pour 15 mn</li>
-								<li>Le dessus de chaque mi-cuit doit former une croûte et l'intérieur doit être coulant</li>
-								<li>Servir dès la sortie du four démoulé ou pas</li>
-							</ol>
-						</div>
-						<div class="col-lg-4">
-  							<img src="images/micuit.png" width="300px">
-  						</div>						
+					<div class="recette-photo-wrap">
+						<img src="images/ingredients.jpg" alt="Crème pâtissière" class="recette-photo" loading="lazy">
 					</div>
+				</div>
+			</article>
 
-					<!----------------------------------------------------------------------------->	
-
-
-					<h2 id="bearnaise"> Recette Béarnaise Maison (1 personnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>un jaune d'œuf</li>
-								<li>une cuillère à soupe d'huile arachide</li>
-								<li>une cuillère à soupe d'eau</li>
-								<li>1/2 cuillère à soupe de vinaigre à l'estragon</li>
-							</ul>
+			<!-- Les petits choux -->
+			<article id="choux" class="recette-card" data-cat="biscuits">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Les petits choux</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🍪 Pâtisserie</span>
+							<span class="badge-pill">🔥 Four 200°C chaleur tournante</span>
 						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Tout cuire dans un bain-marie, en fouettant</li>
-								<li>Saler à la fin quand c'est sorti, à la fin</li>
-							</ol>
-						</div>				
 					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>125 g de lait demi-écrémé</li>
+							<li>125 g d'eau</li>
+							<li>200 g de farine</li>
+							<li>100 g de margarine</li>
+							<li>5 œufs entiers</li>
+							<li>3 pincées de sel</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Mettre dans une casserole l'eau, le lait, la margarine et le sel.</li>
+							<li>Au premier bouillon, jeter la farine et tourner vivement avec la cuillère en bois jusqu'à ce que la pâte forme une boule et se détache de la casserole.</li>
+							<li>Hors du feu, incorporer les œufs, un à un.</li>
+							<li>Cuire à 200°C chaleur tournante.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/choux.jpg" alt="Les petits choux" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
 
-					<!----------------------------------------------------------------------------->	
-
-					<h2 id="boulettes"> Boulettes Liégoises (6 personnnes)</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>1Kg de haché porc-boeuf</li>
-								<li>4 tranches de pain de mie trempées dans du lait</li>
-								<li>5 oignons dont un finement haché</li>
-								<li>percil</li>
-								<li>2 oeufs</li>
-								<li>muscade, 4 clous de girofle, 2 feuilles de laurier, quelques baies de genévrier</li>
-								<li>1 litre de bouillon de viande</li>
-								<li>4 cuillières à soupe de cassonade</li>
-								<li>2 cuillières à soupe de sirop de Liège</li>
-								<li>chapelure</li>
-								<li>1 trait de vinaigre de vin rouge</li>
-							</ul>
+			<!-- Pâte à crêpes -->
+			<article id="crepe" class="recette-card" data-cat="crepes">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Pâte à crêpes non sucrée</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 4 personnes</span>
+							<span class="badge-pill">⏱️ Repos 30 min</span>
 						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Boulet (haché, pain, oignon haché, persil, oeufs, chapelure), 40' à 120 degré au four dans un plat bien beuré</li>
-								<li>Dans le jus de cuisson, faire revenir 4 oignons emincés</li>
-								<li>Soupoudrer d'une pincée de thym, laisser blondir, ajouterensuite 4 cuillière à soupe de cassonade brune pour former un caramel.</li>
-								<li>Déglacer ensuite avec un filet de vinaigre de vin rouge.</li>
-								<li>Mouiller avec un litre de bouillon de viande, porter à ébullition et mettre le sirop de Liège, les clous de girofles et baies de genévrier. Laisser cuire 35'</li>
-								<li>Fin de cuisson, ajouter raisons de Corinthe et lié la souce avec un beurre manié (beurre+farine)</li>
-							</ol>
-						</div>				
 					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>150 g de farine fermentante</li>
+							<li>4 œufs</li>
+							<li>4 dl de lait</li>
+							<li>4 cuillères à soupe de beurre</li>
+							<li>1 pincée de sel</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Tiédir le lait et le beurre.</li>
+							<li>Battre les œufs entiers en omelette, ajouter la farine et la pincée de sel.</li>
+							<li>Verser le liquide sur ce mélange et fouetter vivement pour obtenir une pâte bien lisse.</li>
+							<li>Laisser reposer de préférence 30 minutes avant l'emploi.</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
-					<!----------------------------------------------------------------------------->	
-
-										<!----------------------------------------------------------------------------->	
-
-					<h2 id="grany"> Bicuits aux flocons d'avoine type grany</h2>
-
-					<div class="row" class="recette">
-						<div class="col-lg-4">
-							<h3>Ingrédients:</h3>
-							<ul>
-								<li>125 g de beurre fondu)</li>
-								<li>1 oeuf</li>
-								<li>4 cuillères à soupe de lait</li>
-								<li>200 g flocon d'avoine</li>
-								<li>150 g farine</li>
-								<li>1 sachet de levure</li>
-								<li>pincé de sel</li>
-								<li>miel ou sucre (80 g ou moins selon préférence)</li>
-								<li>Optionne: canelle, chocolat, raisin sec, </li>
-							</ul>
+			<!-- Cookies au Chocolat -->
+			<article id="cookies" class="recette-card" data-cat="biscuits">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Cookies au chocolat</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🍪 Biscuits</span>
+							<span class="badge-pill">🔥 10-12 min à 180°C</span>
 						</div>
-						<div class="col-lg-4">
-
-							<h3>Préparation:</h3>
-							<ol>
-								<li>Petite boule sur un plage, 15' dans le four 180 °C</li>
-								<li>On peut éventuellement faire griller les flocon avant</li>
-							</ol>
-						</div>	
-					    <div class="col-lg-4">
-  							<img src="images/grany.png" width="300px">
-  						</div>				
 					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>150 g de sucre</li>
+							<li>150 g de sucre brun</li>
+							<li>200 g de beurre fondu</li>
+							<li>2 œufs</li>
+							<li>300 g de farine</li>
+							<li>1 cuillère à café de levure sèche</li>
+							<li>1 paquet de sucre vanilliné</li>
+							<li>300 g de pépites de chocolat</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Préchauffer le four à 180°C.</li>
+							<li>Dans un plat, mélanger les sucres et le beurre fondu.</li>
+							<li>Ajouter les œufs et battre le mélange.</li>
+							<li>Incorporer la farine et la levure.</li>
+							<li>Bien mélanger la préparation en ajoutant le chocolat.</li>
+							<li>Former des petites boules sur la plaque du four couverte d'un papier de cuisson.</li>
+							<li>Cuire pendant 10-12 minutes (ne pas cuire de trop, ils vont durcir en refroidissant).</li>
+							<li>Laisser refroidir avant la dégustation.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/cookies.jpg" alt="Cookies au chocolat" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
 
+			<!-- Tiramisu -->
+			<article id="tiramissu" class="recette-card" data-cat="desserts">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Tiramisu</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 8 personnes</span>
+							<span class="badge-pill">❄️ 3h frigo + 30 min surgélateur</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>500 g de mascarpone</li>
+							<li>100 g de sucre</li>
+							<li>4 œufs</li>
+							<li>Fruits rouges ou spéculoos</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Battre au fouet électrique les jaunes d'œufs avec le sucre jusqu'à ce qu'ils blanchissent.</li>
+							<li>Ajouter le mascarpone et bien mélanger.</li>
+							<li>Battre les blancs d'œufs en neige ferme et les ajouter délicatement à la préparation.</li>
+							<li>Présenter dans un plat en Pyrex avec des couches de spéculoos ou des fruits rouges.</li>
+							<li>Mettre au moins 3h au réfrigérateur et 30 minutes au surgélateur avant de servir.</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
+			<!-- Pancakes -->
+			<article id="pancakes" class="recette-card" data-cat="crepes">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Pancakes</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 5 personnes</span>
+							<span class="badge-pill">⚡ Sans repos</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>3 œufs</li>
+							<li>3 cuillères à soupe de sucre</li>
+							<li>3 cuillères à soupe d'huile ou de beurre fondu</li>
+							<li>3 cuillères à café de levure</li>
+							<li>375 g de farine</li>
+							<li>500 ml de lait</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Battre les œufs et le sucre dans un saladier.</li>
+							<li>Ajouter le beurre fondu ou l'huile.</li>
+							<li>Mélanger la farine et la levure et incorporer la moitié à la préparation.</li>
+							<li>Délayer progressivement avec le lait tout en rajoutant l'autre moitié de farine petit à petit pour éviter les grumeaux.</li>
+							<li>Aucun temps de repos n'est nécessaire.</li>
+							<li>Cuire dans une poêle à feu moyen : à l'aide d'une petite louche, déposer des ronds dans la poêle.</li>
+							<li>Lorsque les bulles apparaissent et éclatent, retourner les pancakes (attention, une fois retournés cela va encore plus vite).</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
-					<!----------------------------------------------------------------------------->	
+			<!-- Pâte à Pizza -->
+			<article id="pizza" class="recette-card" data-cat="bases">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Pâte à pizza</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 6 personnes</span>
+							<span class="badge-pill">⏱️ Repos 1h au chaud</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>525 g de farine</li>
+							<li>3 cuillères à café de sel</li>
+							<li>1,5 sachet de levure</li>
+							<li>5 cuillères à soupe d'huile d'olive</li>
+							<li>40 cl d'eau tiède</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Mettre la farine dans un grand saladier puis ajouter sel, levure et huile.</li>
+							<li>Verser petit à petit l'eau tiède tout en mélangeant avec une cuillère en bois.</li>
+							<li>Remuer longuement jusqu'à l'obtention d'une pâte qui se détache.</li>
+							<li>Laisser reposer 1h avec un torchon dans un endroit chaud.</li>
+							<li>Travailler la pâte comme une pâte à pain en faisant ressortir l'air.</li>
+							<li>Façonner votre pâte aux dimensions de la plaque du four.</li>
+							<li>Agrémenter de vos envies ou de vos restes dans le frigo.</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
+			<!-- Mousse au chocolat -->
+			<article id="mousse" class="recette-card" data-cat="desserts">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Mousse au chocolat</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 8 personnes</span>
+							<span class="badge-pill">❄️ Repos 6h au frigo</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>200 g de chocolat noir</li>
+							<li>4 œufs</li>
+							<li>2 dl de crème fraîche</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Séparer les blancs et les jaunes.</li>
+							<li>Fondre le chocolat au bain-marie avec très peu de lait.</li>
+							<li>Hors du feu, ajouter un à un les jaunes d'œufs.</li>
+							<li>Battre les blancs en neige ferme.</li>
+							<li>Battre la crème fraîche en chantilly.</li>
+							<li>Mélanger légèrement la crème fraîche et les blancs battus.</li>
+							<li>Les incorporer à la préparation au chocolat tiédie.</li>
+							<li>Laisser prendre au moins 6 heures au réfrigérateur.</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
+			<!-- Cake marbré au chocolat -->
+			<article id="cake" class="recette-card" data-cat="biscuits">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Cake marbré au chocolat</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 8 personnes</span>
+							<span class="badge-pill">🔥 55-60 min à 170°C</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>200 g de beurre</li>
+							<li>200 g de sucre</li>
+							<li>1 paquet de sucre vanillé</li>
+							<li>300 g de farine</li>
+							<li>4 œufs</li>
+							<li>1 sachet de levure chimique (10 g)</li>
+							<li>1 pincée de sel</li>
+							<li>25 g de cacao</li>
+							<li>3 cuillères à soupe de crème fraîche</li>
+							<li>3 cuillères à soupe de lait</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Séparer les jaunes et les blancs.</li>
+							<li>Battre les jaunes, le sucre et le sucre vanillé avec un batteur électrique jusqu'à ce qu'ils blanchissent et forment un ruban.</li>
+							<li>Faire fondre le beurre et l'ajouter au mélange œufs-sucre.</li>
+							<li>Ajouter la crème et le lait pour alléger la pâte.</li>
+							<li>Battre la crème fraîche en chantilly.</li>
+							<li>Battre les blancs en neige ferme avec une pincée de sel à la fin.</li>
+							<li>Ajouter alternativement la farine et les blancs en neige au mélange en travaillant souplement.</li>
+							<li>Mettre 1/3 de la pâte dans un autre récipient et la mélanger avec le cacao.</li>
+							<li>Dans un moule, étaler des couches de pâte blanche et brune successivement en commençant et terminant par une couche blanche (remplir maximum aux 2/3).</li>
+							<li>Préchauffer le four à 170°C et faire cuire pendant 55 à 60 minutes en contrôlant la cuisson avec une aiguille piquée au milieu du gâteau.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/cake.png" alt="Cake marbré au chocolat" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
 
-   			</div>
-   		</div>
-   	</div>
+			<!-- Glace vanille -->
+			<article id="glace" class="recette-card" data-cat="desserts">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Glace vanille de Bonne Maman</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🍨 2 litres de glace</span>
+							<span class="badge-pill">⏱️ Turbine 30 min</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>1 litre de lait demi-écrémé</li>
+							<li>300 g de sucre</li>
+							<li>2 sachets de sucre vanillé</li>
+							<li>10 jaunes d'œufs</li>
+							<li>40 cl de crème fraîche (2 berlingots)</li>
+							<li>1 pincée de sel</li>
+							<li>5 bâtons de chocolat (pour la stracciatella)</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Faire un ruban avec les jaunes et les sucres (battre au fouet électrique jusqu'à ce que ça blanchisse).</li>
+							<li>Faire bouillir le lait avec une pincée de sel.</li>
+							<li>Verser le lait bouillant sur le ruban tout en mélangeant pour éviter que les jaunes ne cuisent.</li>
+							<li>Reverser le mélange dans la casserole.</li>
+							<li>Chauffer en battant jusqu'au premier bouillon et que le mélange épaississe (il devient mousseux, ce qui donnera l'onctuosité).</li>
+							<li>Stopper la cuisson en plongeant la casserole dans un évier d'eau froide.</li>
+							<li>Laisser refroidir puis mettre au frigo jusqu'au refroidissement complet (mettre aussi la crème fraîche au frigo).</li>
+							<li>Lorsque le mélange et la crème sont bien froids, ajouter les deux berlingots de crème fraîche avant de turbiner.</li>
+							<li>Turbiner la glace pendant environ 30 minutes.</li>
+							<li>Pour la stracciatella : faire fondre le chocolat tout doucement à température minimum et l'ajouter à la fin quand la glace est prise.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/glace.png" alt="Glace vanille" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
 
-	
+			<!-- Gaufres de Liège -->
+			<article id="gaufres" class="recette-card" data-cat="crepes">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Gaufres de Liège</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🧇 Gaufrier</span>
+							<span class="badge-pill">⏱️ Repos 15 min</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>50 g de levure fraîche</li>
+							<li>2 dl d'eau froide</li>
+							<li>300 g de beurre</li>
+							<li>400 g de farine</li>
+							<li>25 g de sucre impalpable</li>
+							<li>250 g de sucre perlé</li>
+							<li>2 œufs entiers</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Délayer les 50 g de levure fraîche dans 2 dl d'eau froide.</li>
+							<li>Ramollir le beurre en crème.</li>
+							<li>Mélanger tous les ingrédients et laisser reposer 15 minutes.</li>
+							<li>Cuire dans un gaufrier.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/gaufres.png" alt="Gaufres de Liège" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
 
+			<!-- Mi-Cuit au chocolat -->
+			<article id="micuit" class="recette-card" data-cat="desserts">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Mi-cuit au chocolat</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 4 personnes</span>
+							<span class="badge-pill">🔥 15 min à 200°C</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>40 g de farine</li>
+							<li>3 œufs entiers</li>
+							<li>100 g de chocolat noir</li>
+							<li>90 g de beurre</li>
+							<li>120 g de sucre</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Préchauffer le four à 200°C.</li>
+							<li>Fondre le chocolat et le beurre.</li>
+							<li>Blanchir les œufs entiers et le sucre au batteur.</li>
+							<li>Mélanger le chocolat, le beurre et les œufs.</li>
+							<li>Incorporer la farine.</li>
+							<li>Beurrer des ramequins ou des moules en aluminium jetables et verser la préparation.</li>
+							<li>Enfourner pour 15 minutes : le dessus doit former une croûte et l'intérieur doit être coulant.</li>
+							<li>Servir dès la sortie du four, démoulé ou non.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/micuit.png" alt="Mi-cuit au chocolat" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
 
+			<!-- Sauce Béarnaise -->
+			<article id="bearnaise" class="recette-card" data-cat="sale">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Recette béarnaise maison</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 1 personne</span>
+							<span class="badge-pill">🥣 Bain-marie</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>1 jaune d'œuf</li>
+							<li>1 cuillère à soupe d'huile d'arachide</li>
+							<li>1 cuillère à soupe d'eau</li>
+							<li>1/2 cuillère à soupe de vinaigre à l'estragon</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Tout cuire dans un bain-marie, en fouettant.</li>
+							<li>Saler à la fin quand c'est sorti du feu.</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
+			<!-- Boulettes Liégeoises -->
+			<article id="boulettes" class="recette-card" data-cat="sale">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Boulettes liégeoises</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">👥 6 personnes</span>
+							<span class="badge-pill">🔥 40 min four + 35 min mijotage</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>1 kg de haché porc-bœuf</li>
+							<li>4 tranches de pain de mie trempées dans du lait</li>
+							<li>5 oignons dont un finement haché</li>
+							<li>Persil</li>
+							<li>2 œufs</li>
+							<li>Muscade, 4 clous de girofle, 2 feuilles de laurier, quelques baies de genévrier</li>
+							<li>1 litre de bouillon de viande</li>
+							<li>4 cuillères à soupe de cassonade</li>
+							<li>2 cuillères à soupe de sirop de Liège</li>
+							<li>Chapelure</li>
+							<li>1 trait de vinaigre de vin rouge</li>
+							<li>Raisins de Corinthe, beurre + farine (beurre manié)</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>Former les boulets (haché, pain, oignon haché, persil, œufs, chapelure) et cuire 40 min à 120°C au four dans un plat bien beurré.</li>
+							<li>Dans le jus de cuisson, faire revenir 4 oignons émincés.</li>
+							<li>Saupoudrer d'une pincée de thym, laisser blondir, puis ajouter 4 cuillères à soupe de cassonade brune pour former un caramel.</li>
+							<li>Déglacer ensuite avec un filet de vinaigre de vin rouge.</li>
+							<li>Mouiller avec 1 litre de bouillon de viande, porter à ébullition et mettre le sirop de Liège, les clous de girofle, le laurier et les baies de genévrier. Laisser cuire 35 min.</li>
+							<li>En fin de cuisson, ajouter les raisins de Corinthe et lier la sauce avec un beurre manié (beurre + farine).</li>
+						</ol>
+					</div>
+				</div>
+			</article>
 
+			<!-- Biscuits Grany -->
+			<article id="grany" class="recette-card" data-cat="biscuits">
+				<div class="recette-header">
+					<div class="recette-title-group">
+						<h2 class="recette-title">Biscuits aux flocons d'avoine type Grany</h2>
+						<div class="recette-badges">
+							<span class="badge-pill">🍪 Biscuits</span>
+							<span class="badge-pill">🔥 15 min à 180°C</span>
+						</div>
+					</div>
+					<div class="recette-actions">
+						<button type="button" class="reset-checks-btn">Réinitialiser</button>
+						<a href="#top" class="top-link-btn">↑ Recettes</a>
+					</div>
+				</div>
+				<div class="recette-body with-photo">
+					<div>
+						<h3 class="section-label">Ingrédients <span class="tap-hint">(toucher pour cocher)</span></h3>
+						<ul class="ingredients-list">
+							<li>125 g de beurre fondu</li>
+							<li>1 œuf</li>
+							<li>4 cuillères à soupe de lait</li>
+							<li>200 g de flocons d'avoine</li>
+							<li>150 g de farine</li>
+							<li>1 sachet de levure</li>
+							<li>1 pincée de sel</li>
+							<li>Miel ou sucre (80 g ou moins selon préférence)</li>
+							<li>Optionnel : cannelle, chocolat, raisins secs</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="section-label">Préparation</h3>
+						<ol class="steps-list">
+							<li>On peut éventuellement faire griller les flocons d'avoine avant.</li>
+							<li>Mélanger les ingrédients, former des petites boules sur une plaque et cuire 15 minutes au four à 180°C.</li>
+						</ol>
+					</div>
+					<div class="recette-photo-wrap">
+						<img src="images/grany.png" alt="Biscuits aux flocons d'avoine type Grany" class="recette-photo" loading="lazy">
+					</div>
+				</div>
+			</article>
+
+		</div>
+	</main>
+
+	<!-- Bouton flottant retour rapide en haut sur iPhone -->
+	<a href="#top" id="floatingTopBtn" class="floating-top-btn" aria-label="Retourner à la liste des recettes">
+		↑ Toutes les recettes
+	</a>
+
+	<script>
+		(function () {
+			var searchInput = document.getElementById('searchInput');
+			var clearSearchBtn = document.getElementById('clearSearchBtn');
+			var quickJumpSelect = document.getElementById('quickJumpSelect');
+			var catPills = document.querySelectorAll('.cat-pill[data-cat]');
+			var recipeCards = document.querySelectorAll('.recette-card');
+			var indexCards = document.querySelectorAll('.index-card');
+			var emptyState = document.getElementById('emptyState');
+			var resetFilterBtn = document.getElementById('resetFilterBtn');
+			var floatingTopBtn = document.getElementById('floatingTopBtn');
+			var toggleSommaireBtn = document.getElementById('toggleSommaireBtn');
+			var recipeGrid = document.getElementById('recipeGrid');
+
+			var currentCategory = 'all';
+
+			function normalizeText(str) {
+				return (str || '')
+					.toLowerCase()
+					.normalize('NFD')
+					.replace(/[\u0300-\u036f]/g, '');
+			}
+
+			function applyFilters() {
+				var query = normalizeText(searchInput.value.trim());
+				clearSearchBtn.classList.toggle('visible', query.length > 0);
+
+				var visibleCount = 0;
+
+				recipeCards.forEach(function (card) {
+					var catMatch = currentCategory === 'all' || card.getAttribute('data-cat') === currentCategory;
+					var textMatch = !query || normalizeText(card.textContent).indexOf(query) !== -1;
+					var show = catMatch && textMatch;
+					card.classList.toggle('hidden', !show);
+					if (show) visibleCount++;
+				});
+
+				indexCards.forEach(function (idxCard) {
+					var targetId = idxCard.getAttribute('data-target');
+					var targetCard = document.getElementById(targetId);
+					var show = targetCard && !targetCard.classList.contains('hidden');
+					idxCard.classList.toggle('hidden', !show);
+				});
+
+				emptyState.classList.toggle('visible', visibleCount === 0);
+			}
+
+			searchInput.addEventListener('input', applyFilters);
+
+			clearSearchBtn.addEventListener('click', function () {
+				searchInput.value = '';
+				applyFilters();
+				searchInput.focus();
+			});
+
+			catPills.forEach(function (pill) {
+				pill.addEventListener('click', function () {
+					catPills.forEach(function (p) { p.classList.remove('active'); });
+					pill.classList.add('active');
+					currentCategory = pill.getAttribute('data-cat');
+					applyFilters();
+				});
+			});
+
+			if (resetFilterBtn) {
+				resetFilterBtn.addEventListener('click', function () {
+					searchInput.value = '';
+					currentCategory = 'all';
+					catPills.forEach(function (p) {
+						p.classList.toggle('active', p.getAttribute('data-cat') === 'all');
+					});
+					applyFilters();
+				});
+			}
+
+			// Menu déroulant "Aller à…"
+			quickJumpSelect.addEventListener('change', function () {
+				var targetHash = quickJumpSelect.value;
+				if (!targetHash) return;
+
+				// Si la recette était masquée par un filtre, réinitialiser le filtre
+				var targetEl = document.querySelector(targetHash);
+				if (targetEl && targetEl.classList.contains('hidden')) {
+					searchInput.value = '';
+					currentCategory = 'all';
+					catPills.forEach(function (p) {
+						p.classList.toggle('active', p.getAttribute('data-cat') === 'all');
+					});
+					applyFilters();
+				}
+
+				window.location.hash = targetHash;
+				setTimeout(function () {
+					quickJumpSelect.selectedIndex = 0;
+				}, 300);
+			});
+
+			// Masquer / afficher la grille sommaire
+			toggleSommaireBtn.addEventListener('click', function () {
+				var isHidden = recipeGrid.classList.toggle('hidden');
+				toggleSommaireBtn.textContent = isHidden ? 'Afficher' : 'Masquer';
+			});
+
+			// Cocher / décocher les ingrédients et étapes au toucher
+			document.addEventListener('click', function (e) {
+				var li = e.target.closest('.ingredients-list li, .steps-list li');
+				if (li) {
+					li.classList.toggle('checked');
+					var card = li.closest('.recette-card');
+					if (card) {
+						var hasChecked = card.querySelectorAll('.checked').length > 0;
+						card.classList.toggle('has-checked', hasChecked);
+					}
+					return;
+				}
+
+				var resetBtn = e.target.closest('.reset-checks-btn');
+				if (resetBtn) {
+					var parentCard = resetBtn.closest('.recette-card');
+					if (parentCard) {
+						parentCard.querySelectorAll('.checked').forEach(function (el) {
+							el.classList.remove('checked');
+						});
+						parentCard.classList.remove('has-checked');
+					}
+				}
+			});
+
+			// Bouton flottant retour en haut
+			window.addEventListener('scroll', function () {
+				var show = window.scrollY > 420;
+				floatingTopBtn.classList.toggle('visible', show);
+			}, { passive: true });
+
+			// Mode "Écran actif" (Screen Wake Lock API sur iOS 16.4+)
+			var wakeLock = null;
+			var wakeLockBtn = document.getElementById('wakeLockBtn');
+			var wakeText = document.getElementById('wakeText');
+
+			if ('wakeLock' in navigator && wakeLockBtn) {
+				wakeLockBtn.addEventListener('click', async function () {
+					try {
+						if (wakeLock !== null) {
+							await wakeLock.release();
+							wakeLock = null;
+							wakeLockBtn.classList.remove('active');
+							wakeText.textContent = 'Écran actif';
+						} else {
+							wakeLock = await navigator.wakeLock.request('screen');
+							wakeLockBtn.classList.add('active');
+							wakeText.textContent = 'Écran maintenu';
+							wakeLock.addEventListener('release', function () {
+								wakeLock = null;
+								wakeLockBtn.classList.remove('active');
+								wakeText.textContent = 'Écran actif';
+							});
+						}
+					} catch (err) {
+						console.warn('WakeLock non disponible:', err);
+					}
+				});
+			} else if (wakeLockBtn) {
+				wakeLockBtn.style.display = 'none';
+			}
+		})();
+	</script>
 </body>
 </html>
